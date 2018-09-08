@@ -3,7 +3,6 @@ package ${controller.packageName};
 <% for(import in controller.imports!){ %>
 import ${import};
 <% } %>
-import com.stylefeng.guns.core.idworker.Sid;
 
 /**
  * ${context.bizChName}控制器
@@ -20,8 +19,6 @@ public class ${context.bizEnBigName}Controller extends BaseController {
     @Autowired
     private I${context.entityName}Service ${context.bizEnName}Service;
 
-    @Autowired
-    private Sid sid;
 
     /**
      * 跳转到${context.bizChName}首页
@@ -65,7 +62,6 @@ public class ${context.bizEnBigName}Controller extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(${context.entityName} ${context.bizEnName}) {
-        ${context.bizEnName}.setId(sid.nextShort());
         ${context.bizEnName}Service.insert(${context.bizEnName});
         return SUCCESS_TIP;
     }

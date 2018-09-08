@@ -14,7 +14,7 @@ var MyOrder = {
 MyOrder.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-            {title: '', field: 'id', visible: true, align: 'center', valign: 'middle'},
+        {title: '订单id', field: 'id', visible: false, align: 'center', valign: 'middle'},
             {title: '下单人名称', field: 'user', visible: true, align: 'center', valign: 'middle'},
             {title: '地点', field: 'place', visible: true, align: 'center', valign: 'middle'},
             {title: '商品名称', field: 'goods', visible: true, align: 'center', valign: 'middle'},

@@ -15,6 +15,9 @@ ${context.bizEnBigName}.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
         <% for(item in table.fields!){ %>
+        <% if(itemLP.index == 1){ %>
+        {title: '${item.comment}', field: '${item.propertyName}', visible: false, align: 'center', valign: 'middle'},
+        <% continue;} %>
         <% if(itemLP.last != true){ %>
             {title: '${item.comment}', field: '${item.propertyName}', visible: true, align: 'center', valign: 'middle'},
         <% }else{ %>

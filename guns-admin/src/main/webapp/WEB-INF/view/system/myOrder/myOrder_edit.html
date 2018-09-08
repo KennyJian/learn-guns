@@ -3,6 +3,7 @@
     <div class="ibox-content">
         <div class="form-horizontal">
 
+            <input id="id" value="${item.id}" type="hidden"/>
             <div class="row">
                 <div class="col-sm-6 b-r">
                             <#input id="user" name="下单人名称" value="${item.user}" underline="true"/>
@@ -26,4 +27,9 @@
     </div>
 </div>
 <script src="${ctxPath}/static/modular/system/myOrder/myOrder_info.js"></script>
+<script>
+    laydate.render({
+        elem:'#createtime'
+    });
+</script>
 @}

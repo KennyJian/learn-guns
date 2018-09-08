@@ -46,6 +46,8 @@ ${context.bizEnBigName}InfoDlg.close = function() {
 ${context.bizEnBigName}InfoDlg.collectData = function() {
     this
     <% for(item in table.fields!){ %>
+    <% if(itemLP.index == 1){ %>
+    <% continue;}%>
     <% if(itemLP.last != true){ %>
     .set('${item.propertyName}')
     <% }else{ %>

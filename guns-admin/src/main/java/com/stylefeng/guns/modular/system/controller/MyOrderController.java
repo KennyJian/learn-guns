@@ -11,13 +11,12 @@ import com.stylefeng.guns.core.log.LogObjectHolder;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.modular.system.model.MyOrder;
 import com.stylefeng.guns.modular.system.service.IMyOrderService;
-import com.stylefeng.guns.core.idworker.Sid;
 
 /**
  * 订单管理控制器
  *
  * @author fengshuonan
- * @Date 2018-09-07 16:23:57
+ * @Date 2018-09-08 19:36:50
  */
 @Controller
 @RequestMapping("/myOrder")
@@ -28,8 +27,6 @@ public class MyOrderController extends BaseController {
     @Autowired
     private IMyOrderService myOrderService;
 
-    @Autowired
-    private Sid sid;
 
     /**
      * 跳转到订单管理首页
@@ -51,8 +48,9 @@ public class MyOrderController extends BaseController {
      * 跳转到修改订单管理
      */
     @RequestMapping("/myOrder_update/{myOrderId}")
-    public String myOrderUpdate(@PathVariable Integer myOrderId, Model model) {
-        MyOrder myOrder = myOrderService.selectById(myOrderId);
+    public String myOrderUpdate(@PathVariable String myOrderId, Model model) {
+        Long idByInt= Long.parseLong(myOrderId);
+        MyOrder myOrder = myOrderService.selectById(idByInt);
         model.addAttribute("item",myOrder);
         LogObjectHolder.me().set(myOrder);
         return PREFIX + "myOrder_edit.html";
@@ -73,7 +71,6 @@ public class MyOrderController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(MyOrder myOrder) {
-        myOrder.setId(sid.nextShort());
         myOrderService.insert(myOrder);
         return SUCCESS_TIP;
     }
@@ -83,8 +80,9 @@ public class MyOrderController extends BaseController {
      */
     @RequestMapping(value = "/delete")
     @ResponseBody
-    public Object delete(@RequestParam Integer myOrderId) {
-        myOrderService.deleteById(myOrderId);
+    public Object delete(@RequestParam String myOrderId) {
+        Long idByInt= Long.parseLong(myOrderId);
+        myOrderService.deleteById(idByInt);
         return SUCCESS_TIP;
     }
 
@@ -103,7 +101,8 @@ public class MyOrderController extends BaseController {
      */
     @RequestMapping(value = "/detail/{myOrderId}")
     @ResponseBody
-    public Object detail(@PathVariable("myOrderId") Integer myOrderId) {
-        return myOrderService.selectById(myOrderId);
+    public Object detail(@PathVariable("myOrderId") String myOrderId) {
+        Long idByInt= Long.parseLong(myOrderId);
+        return myOrderService.selectById(idByInt);
     }
 }

@@ -2,7 +2,10 @@ package com.stylefeng.guns.modular.system.model;
 
 import java.util.Date;
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
+
 import java.io.Serializable;
 
 /**
@@ -11,14 +14,18 @@ import java.io.Serializable;
  * </p>
  *
  * @author kenny
- * @since 2018-09-07
+ * @since 2018-09-08
  */
 @TableName("my_order")
 public class MyOrder extends Model<MyOrder> {
 
     private static final long serialVersionUID = 1L;
 
-    private String id;
+    /**
+     * 订单id
+     */
+    @TableId(value = "id", type = IdType.ID_WORKER)
+    private Long id;
     /**
      * 下单人名称
      */
@@ -37,11 +44,11 @@ public class MyOrder extends Model<MyOrder> {
     private Date createtime;
 
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -45,6 +45,7 @@ MyOrderInfoDlg.close = function() {
  */
 MyOrderInfoDlg.collectData = function() {
     this
+    .set('id')
     .set('user')
     .set('place')
     .set('goods')
