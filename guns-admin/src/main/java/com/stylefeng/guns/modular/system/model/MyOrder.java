@@ -24,7 +24,7 @@ public class MyOrder extends Model<MyOrder> {
     /**
      * 订单id
      */
-    @TableId(value = "id", type = IdType.ID_WORKER)
+    @TableId(value="id", type= IdType.ID_WORKER)
     private Long id;
     /**
      * 下单人名称
