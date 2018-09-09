@@ -1,6 +1,9 @@
 package com.stylefeng.guns.modular.system.controller;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.util.ToolUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +17,7 @@ import com.stylefeng.guns.modular.system.service.IMyOrderService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 /**
  * 订单管理控制器
@@ -65,6 +69,11 @@ public class MyOrderController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String condition) {
+        if(ToolUtil.isNotEmpty(condition)){
+            EntityWrapper<MyOrder> myOrderEntityWrapper=new EntityWrapper<>();
+            Wrapper<MyOrder> gooods=myOrderEntityWrapper.like("goods","%"+condition+"%");
+            return myOrderService.selectList(gooods);
+        }
         return myOrderService.selectList(null);
     }
 
