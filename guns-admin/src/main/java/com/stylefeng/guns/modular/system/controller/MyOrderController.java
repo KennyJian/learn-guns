@@ -6,6 +6,8 @@ import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.common.annotion.BussinessLog;
 import com.stylefeng.guns.core.common.constant.dictmap.OrderDict;
 import com.stylefeng.guns.core.util.ToolUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -85,6 +87,7 @@ public class MyOrderController extends BaseController {
     @RequestMapping(value = "/add")
     @BussinessLog(value = "添加订单",key = "user,place",dict = OrderDict.class)
     @ResponseBody
+    @ApiOperation(value = "添加订单")
     public Object add(MyOrder myOrder) {
         myOrderService.insert(myOrder);
         return SUCCESS_TIP;
