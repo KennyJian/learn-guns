@@ -3,6 +3,7 @@ package com.stylefeng.guns.modular.system.controller;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.common.annotion.BussinessLog;
 import com.stylefeng.guns.core.util.ToolUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -81,6 +82,7 @@ public class MyOrderController extends BaseController {
      * 新增订单管理
      */
     @RequestMapping(value = "/add")
+    @BussinessLog(value = "添加订单",key = "user,place")
     @ResponseBody
     public Object add(MyOrder myOrder) {
         myOrderService.insert(myOrder);
