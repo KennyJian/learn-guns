@@ -12,7 +12,7 @@ public class OrderDict extends AbstractDictMap {
 
     @Override
     public void init() {
-        put("id","订单id");
+        put("myOrderId","订单id");
         put("user","下单人名称");
         put("place","地点");
         put("goods","商品名称");

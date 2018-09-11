@@ -94,6 +94,7 @@ public class MyOrderController extends BaseController {
      * 删除订单管理
      */
     @RequestMapping(value = "/delete")
+    @BussinessLog(value = "删除订单",key = "myOrderId",dict = OrderDict.class)
     @ResponseBody
     public Object delete(@RequestParam String myOrderId) {
         Long idByInt= Long.parseLong(myOrderId);
@@ -105,6 +106,7 @@ public class MyOrderController extends BaseController {
      * 修改订单管理
      */
     @RequestMapping(value = "/update")
+    @BussinessLog(value = "修改订单",key = "user,place",dict = OrderDict.class)
     @ResponseBody
     public Object update(MyOrder myOrder) {
         myOrderService.updateById(myOrder);
