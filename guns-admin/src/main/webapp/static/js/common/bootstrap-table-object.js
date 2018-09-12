@@ -35,6 +35,7 @@
                         data: this.data
                     },
                     toolbar: "#" + this.toolbarId,//顶部工具条
+                    resizable: true,            //可拖动列宽
                     striped: true,     			//是否显示行间隔色
                     cache: false,      			//是否使用缓存,默认为true
                     pagination: true,     		//是否显示分页（*）
@@ -63,7 +64,7 @@
                         toggle: 'glyphicon-list-alt',
                         columns: 'glyphicon-list'
                     },
-                    iconSize: 'outline'
+                    iconSize: 'outline',
                 });
             return this;
         },

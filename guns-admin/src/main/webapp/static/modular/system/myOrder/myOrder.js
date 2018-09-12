@@ -1,6 +1,7 @@
 /**
  * 订单管理管理初始化
  */
+
 var MyOrder = {
     id: "MyOrderTable",	//表格id
     seItem: null,		//选中的条目
