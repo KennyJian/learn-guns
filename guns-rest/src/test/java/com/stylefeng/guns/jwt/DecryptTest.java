@@ -16,12 +16,12 @@ public class DecryptTest {
 
     public static void main(String[] args) {
 
-        String salt = "0iqwhi";
+        String salt = "lhfprf";
 
         SimpleObject simpleObject = new SimpleObject();
-        simpleObject.setUser("stylefeng");
+        simpleObject.setUser("kenny");
         simpleObject.setAge(12);
-        simpleObject.setName("ffff");
+        simpleObject.setName("jian");
         simpleObject.setTips("code");
 
         String jsonString = JSON.toJSONString(simpleObject);

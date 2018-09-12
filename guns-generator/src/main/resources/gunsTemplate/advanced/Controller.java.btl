@@ -51,6 +51,7 @@ public class ${context.bizEnBigName}Controller extends BaseController {
     /**
      * 获取${context.bizChName}列表
      */
+    @Permission
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String condition) {
@@ -60,6 +61,7 @@ public class ${context.bizEnBigName}Controller extends BaseController {
     /**
      * 新增${context.bizChName}
      */
+    @Permission
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(${context.entityName} ${context.bizEnName}) {
@@ -70,6 +72,7 @@ public class ${context.bizEnBigName}Controller extends BaseController {
     /**
      * 删除${context.bizChName}
      */
+    @Permission
     @RequestMapping(value = "/delete")
     @ResponseBody
     public Object delete(@RequestParam String ${context.bizEnName}Id) {
@@ -81,6 +84,7 @@ public class ${context.bizEnBigName}Controller extends BaseController {
     /**
      * 修改${context.bizChName}
      */
+    @Permission
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(${context.entityName} ${context.bizEnName}) {

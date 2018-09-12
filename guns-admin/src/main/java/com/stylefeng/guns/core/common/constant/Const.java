@@ -33,4 +33,6 @@ public interface Const {
      */
     String API_MENU_NAME = "接口文档";
 
+    String VIEWER_NAME="temp";
+
 }

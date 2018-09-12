@@ -16,6 +16,7 @@
 package com.stylefeng.guns.core.aop;
 
 import com.stylefeng.guns.core.common.annotion.Permission;
+import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.shiro.check.PermissionCheckManager;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -64,7 +65,6 @@ public class PermissionAop {
                 throw new NoPermissionException();
             }
         }
-
     }
 
 }
