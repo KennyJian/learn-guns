@@ -4,15 +4,13 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.common.annotion.BussinessLog;
-import com.stylefeng.guns.core.common.annotion.Permission;
-import com.stylefeng.guns.core.common.constant.Const;
 import com.stylefeng.guns.core.common.constant.dictmap.OrderDict;
-import com.stylefeng.guns.core.shiro.ShiroKit;
-import com.stylefeng.guns.core.shiro.ShiroUser;
+import com.stylefeng.guns.core.common.exception.BizExceptionEnum;
+import com.stylefeng.guns.core.exception.GunsException;
 import com.stylefeng.guns.core.util.ToolUtil;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.ui.Model;
@@ -23,9 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.modular.system.model.MyOrder;
 import com.stylefeng.guns.modular.system.service.IMyOrderService;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.List;
+import javax.validation.Valid;
 
 /**
  * 订单管理控制器
@@ -92,7 +88,10 @@ public class MyOrderController extends BaseController {
     @BussinessLog(value = "添加订单",key = "user,place",dict = OrderDict.class)
     @ResponseBody
     @ApiOperation(value = "添加订单")
-    public Object add(MyOrder myOrder) {
+    public Object add(@Valid MyOrder myOrder, BindingResult result) {
+        if (result.hasErrors()) {
+            throw new GunsException(BizExceptionEnum.REQUEST_NULL);
+        }
         myOrderService.insert(myOrder);
         return SUCCESS_TIP;
     }

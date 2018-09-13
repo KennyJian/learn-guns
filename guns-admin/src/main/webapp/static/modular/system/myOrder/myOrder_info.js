@@ -2,7 +2,46 @@
  * 初始化订单管理详情对话框
  */
 var MyOrderInfoDlg = {
-    myOrderInfoData : {}
+    myOrderInfoData : {},
+    validateFields: {
+        user: {
+            validators: {
+                notEmpty: {
+                    message: '下单人名称不能为空'
+                }
+            }
+        },
+        place: {
+            validators: {
+                notEmpty: {
+                    message: '地点不能为空'
+                }
+            }
+        },
+        goods: {
+            validators: {
+                notEmpty: {
+                    message: '商品名称不能为空'
+                }
+            }
+        },
+        createtime: {
+            validators: {
+                notEmpty: {
+                    message: '下单时间不能为空'
+                }
+            }
+        },
+    }
+};
+
+/**
+ * 验证数据是否为空
+ */
+MyOrderInfoDlg.validate = function () {
+    $('#MyOrderInfoForm').data("bootstrapValidator").resetForm();
+    $('#MyOrderInfoForm').bootstrapValidator('validate');
+    return $("#MyOrderInfoForm").data('bootstrapValidator').isValid();
 };
 
 /**
@@ -60,6 +99,10 @@ MyOrderInfoDlg.addSubmit = function() {
     this.clearData();
     this.collectData();
 
+    if (!this.validate()) {
+        return;
+    }
+
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/myOrder/add", function(data){
         Feng.success("添加成功!");
@@ -80,6 +123,10 @@ MyOrderInfoDlg.editSubmit = function() {
     this.clearData();
     this.collectData();
 
+    if (!this.validate()) {
+        return;
+    }
+
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/myOrder/update", function(data){
         Feng.success("修改成功!");
@@ -93,5 +140,5 @@ MyOrderInfoDlg.editSubmit = function() {
 }
 
 $(function() {
-
+    Feng.initValidator("MyOrderInfoForm", MyOrderInfoDlg.validateFields);
 });
