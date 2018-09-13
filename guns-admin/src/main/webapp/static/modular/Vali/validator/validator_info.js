@@ -22,6 +22,9 @@ var ValidatorInfoDlg = {
                 validators: {
                     notEmpty: {
                         message: '订单剩余量不能为空'
+                    },
+                    digits: {
+                        message: '该值只能包含数字。'
                     }
                 }
             }
