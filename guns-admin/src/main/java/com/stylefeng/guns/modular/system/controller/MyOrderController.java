@@ -75,8 +75,8 @@ public class MyOrderController extends BaseController {
     public Object list(String condition) {
         if(ToolUtil.isNotEmpty(condition)){
             EntityWrapper<MyOrder> myOrderEntityWrapper=new EntityWrapper<>();
-            Wrapper<MyOrder> gooods=myOrderEntityWrapper.like("goods","%"+condition+"%");
-            return myOrderService.selectList(gooods);
+            Wrapper<MyOrder> goods=myOrderEntityWrapper.like("goods","%"+condition+"%");
+            return myOrderService.selectList(goods);
         }
         return myOrderService.selectList(null);
     }

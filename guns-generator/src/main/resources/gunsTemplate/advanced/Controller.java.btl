@@ -3,11 +3,6 @@ package ${controller.packageName};
 <% for(import in controller.imports!){ %>
 import ${import};
 <% } %>
-import com.stylefeng.guns.core.common.annotion.Permission;
-import com.stylefeng.guns.core.common.exception.BizExceptionEnum;
-import com.stylefeng.guns.core.exception.GunsException;
-import org.springframework.validation.BindingResult;
-import javax.validation.Valid;
 
 /**
  * ${context.bizChName}控制器

@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.stylefeng.guns.core.log.LogObjectHolder;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.stylefeng.guns.modular.system.model.Validator;
-import com.stylefeng.guns.modular.Vali.service.IValidatorService;
 import com.stylefeng.guns.core.common.annotion.Permission;
 import com.stylefeng.guns.core.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.core.exception.GunsException;
 import org.springframework.validation.BindingResult;
 import javax.validation.Valid;
+import com.stylefeng.guns.modular.system.model.Validator;
+import com.stylefeng.guns.modular.Vali.service.IValidatorService;
 
 /**
  * 测试验证控制器
  *
  * @author fengshuonan
- * @Date 2018-09-13 21:01:15
+ * @Date 2018-09-14 10:15:13
  */
 @Controller
 @RequestMapping("/validator")

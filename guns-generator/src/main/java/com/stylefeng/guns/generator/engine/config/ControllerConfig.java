@@ -28,6 +28,11 @@ public class ControllerConfig {
         imports.add("org.springframework.beans.factory.annotation.Autowired");
         imports.add(contextConfig.getProPackage() + ".core.log.LogObjectHolder");
         imports.add("org.springframework.web.bind.annotation.RequestParam");
+        imports.add("com.stylefeng.guns.core.common.annotion.Permission");
+        imports.add("com.stylefeng.guns.core.common.exception.BizExceptionEnum");
+        imports.add("com.stylefeng.guns.core.exception.GunsException");
+        imports.add("org.springframework.validation.BindingResult");
+        imports.add("javax.validation.Valid");
         imports.add(contextConfig.getModelPackageName() + "." + contextConfig.getEntityName());
         imports.add(contextConfig.getProPackage() + ".modular." + contextConfig.getModuleName() + ".service" + ".I" + contextConfig.getEntityName() + "Service");
         this.imports = imports;

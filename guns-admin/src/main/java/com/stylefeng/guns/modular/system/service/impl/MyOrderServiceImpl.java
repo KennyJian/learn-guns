@@ -16,5 +16,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MyOrderServiceImpl extends ServiceImpl<MyOrderMapper, MyOrder> implements IMyOrderService {
+    public void add(){
+    }
 
 }
