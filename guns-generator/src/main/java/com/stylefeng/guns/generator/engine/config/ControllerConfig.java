@@ -33,6 +33,9 @@ public class ControllerConfig {
         imports.add("com.stylefeng.guns.core.exception.GunsException");
         imports.add("org.springframework.validation.BindingResult");
         imports.add("javax.validation.Valid");
+        imports.add("com.stylefeng.guns.core.shiro.ShiroKit");
+        imports.add("com.stylefeng.guns.core.util.ToolUtil");
+        imports.add("com.baomidou.mybatisplus.mapper.EntityWrapper");
         imports.add(contextConfig.getModelPackageName() + "." + contextConfig.getEntityName());
         imports.add(contextConfig.getProPackage() + ".modular." + contextConfig.getModuleName() + ".service" + ".I" + contextConfig.getEntityName() + "Service");
         this.imports = imports;

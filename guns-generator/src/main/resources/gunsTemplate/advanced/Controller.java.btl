@@ -54,8 +54,23 @@ public class ${context.bizEnBigName}Controller extends BaseController {
     @Permission
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String condition) {
-        return ${context.bizEnName}Service.selectList(null);
+    public Object list(<% for(item in table.fields!){%>
+    <% if(itemLP.last != true){ %>
+    @RequestParam(required = false) String ${item.propertyName},
+    <%}else{%>
+    @RequestParam(required = false) String ${item.propertyName}){
+    <%}%>
+    <%}%>
+        EntityWrapper<${context.entityName}> entityWrapper=new EntityWrapper<>();
+        <% for(item in table.fields!){%>
+        if(ToolUtil.isNotEmpty(${item.propertyName})){
+            entityWrapper.like("${item.propertyName}",${item.propertyName});
+        }
+        <%}%>
+        if (!ShiroKit.isAdmin()){
+            entityWrapper.in("deptid",ShiroKit.getDeptDataScope());
+        }
+        return ${context.bizEnName}Service.selectList(entityWrapper);
     }
 
     /**

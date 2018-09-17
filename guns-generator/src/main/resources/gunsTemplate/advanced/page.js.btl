@@ -93,7 +93,9 @@ ${context.bizEnBigName}.delete = function () {
  */
 ${context.bizEnBigName}.search = function () {
     var queryData = {};
-    queryData['condition'] = $("#condition").val();
+    <% for(item in table.fields!){ %>
+        queryData['${item.propertyName}'] = $("#${item.propertyName}").val();
+    <%}%>
     ${context.bizEnBigName}.table.refresh({query: queryData});
 };
 

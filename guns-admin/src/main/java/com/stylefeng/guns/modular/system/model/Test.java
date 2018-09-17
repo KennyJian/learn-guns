@@ -2,7 +2,10 @@ package com.stylefeng.guns.modular.system.model;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
+
 import java.io.Serializable;
 
 /**
@@ -11,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author kenny
- * @since 2018-09-09
+ * @since 2018-09-17
  */
 @TableName("tmp_test")
 public class Test extends Model<Test> {
@@ -21,6 +24,7 @@ public class Test extends Model<Test> {
     /**
      * id
      */
+    @TableId(value="id", type= IdType.ID_WORKER)
     private Long id;
     /**
      * 订单名
@@ -37,6 +41,10 @@ public class Test extends Model<Test> {
      */
     @TableField("order_to")
     private String orderTo;
+    /**
+     * 所属公司id
+     */
+    private Integer deptid;
 
 
     public Long getId() {
@@ -71,6 +79,14 @@ public class Test extends Model<Test> {
         this.orderTo = orderTo;
     }
 
+    public Integer getDeptid() {
+        return deptid;
+    }
+
+    public void setDeptid(Integer deptid) {
+        this.deptid = deptid;
+    }
+
     @Override
     protected Serializable pkVal() {
         return this.id;
@@ -83,6 +99,7 @@ public class Test extends Model<Test> {
         ", orderName=" + orderName +
         ", orderNum=" + orderNum +
         ", orderTo=" + orderTo +
+        ", deptid=" + deptid +
         "}";
     }
 }

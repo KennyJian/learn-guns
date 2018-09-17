@@ -1,7 +1,6 @@
 package com.stylefeng.guns.modular.tempO.controller;
 
 import com.stylefeng.guns.core.base.controller.BaseController;
-import com.stylefeng.guns.core.common.annotion.Permission;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -10,14 +9,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.stylefeng.guns.core.log.LogObjectHolder;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.stylefeng.guns.core.common.annotion.Permission;
+import com.stylefeng.guns.core.common.exception.BizExceptionEnum;
+import com.stylefeng.guns.core.exception.GunsException;
+import org.springframework.validation.BindingResult;
+import javax.validation.Valid;
+import com.stylefeng.guns.core.shiro.ShiroKit;
+import com.stylefeng.guns.core.util.ToolUtil;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.modular.system.model.Test;
 import com.stylefeng.guns.modular.tempO.service.ITestService;
 
 /**
- * 测试第一模板控制器
+ * 测试数据范围控制器
  *
  * @author fengshuonan
- * @Date 2018-09-09 13:23:33
+ * @Date 2018-09-17 17:37:56
  */
 @Controller
 @RequestMapping("/test")
@@ -30,7 +37,7 @@ public class TestController extends BaseController {
 
 
     /**
-     * 跳转到测试第一模板首页
+     * 跳转到测试数据范围首页
      */
     @RequestMapping("")
     public String index() {
@@ -38,7 +45,7 @@ public class TestController extends BaseController {
     }
 
     /**
-     * 跳转到添加测试第一模板
+     * 跳转到添加测试数据范围
      */
     @RequestMapping("/test_add")
     public String testAdd() {
@@ -46,7 +53,7 @@ public class TestController extends BaseController {
     }
 
     /**
-     * 跳转到修改测试第一模板
+     * 跳转到修改测试数据范围
      */
     @RequestMapping("/test_update/{testId}")
     public String testUpdate(@PathVariable String testId, Model model) {
@@ -58,28 +65,56 @@ public class TestController extends BaseController {
     }
 
     /**
-     * 获取测试第一模板列表
+     * 获取测试数据范围列表
      */
-    @RequestMapping(value = "/list")
     @Permission
+    @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String condition) {
-        return testService.selectList(null);
+    public Object list(    @RequestParam(required = false) String id,
+    @RequestParam(required = false) String orderName,
+    @RequestParam(required = false) String orderNum,
+    @RequestParam(required = false) String orderTo,
+    @RequestParam(required = false) String deptid){
+        EntityWrapper<Test> entityWrapper=new EntityWrapper<>();
+        if(ToolUtil.isNotEmpty(id)){
+            entityWrapper.like("id",id);
+        }
+        if(ToolUtil.isNotEmpty(orderName)){
+            entityWrapper.like("order_name",orderName);
+        }
+        if(ToolUtil.isNotEmpty(orderNum)){
+            entityWrapper.like("order_num",orderNum);
+        }
+        if(ToolUtil.isNotEmpty(orderTo)){
+            entityWrapper.like("order_to",orderTo);
+        }
+        if(ToolUtil.isNotEmpty(deptid)){
+            entityWrapper.like("deptid",deptid);
+        }
+        if (!ShiroKit.isAdmin()){
+            entityWrapper.in("deptid",ShiroKit.getDeptDataScope());
+        }
+        return testService.selectList(entityWrapper);
     }
 
     /**
-     * 新增测试第一模板
+     * 新增测试数据范围
      */
+    @Permission
     @RequestMapping(value = "/add")
     @ResponseBody
-    public Object add(Test test) {
+    public Object add(@Valid Test test, BindingResult result) {
+        if (result.hasErrors()) {
+            throw new GunsException(BizExceptionEnum.REQUEST_NULL);
+        }
         testService.insert(test);
         return SUCCESS_TIP;
     }
 
     /**
-     * 删除测试第一模板
+     * 删除测试数据范围
      */
+    @Permission
     @RequestMapping(value = "/delete")
     @ResponseBody
     public Object delete(@RequestParam String testId) {
@@ -89,17 +124,21 @@ public class TestController extends BaseController {
     }
 
     /**
-     * 修改测试第一模板
+     * 修改测试数据范围
      */
+    @Permission
     @RequestMapping(value = "/update")
     @ResponseBody
-    public Object update(Test test) {
+    public Object update(@Valid Test test, BindingResult result) {
+        if (result.hasErrors()) {
+            throw new GunsException(BizExceptionEnum.REQUEST_NULL);
+        }
         testService.updateById(test);
         return SUCCESS_TIP;
     }
 
     /**
-     * 测试第一模板详情
+     * 测试数据范围详情
      */
     @RequestMapping(value = "/detail/{testId}")
     @ResponseBody

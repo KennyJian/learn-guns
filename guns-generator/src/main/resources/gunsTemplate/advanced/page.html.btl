@@ -9,9 +9,11 @@
                 <div class="row row-lg">
                     <div class="col-sm-12">
                         <div class="row">
+                        <% for(item in table.fields!){ %>
                             <div class="col-sm-3">
-                                <#NameCon id="condition" name="名称" />
+                                <#NameCon id="${item.propertyName}" name="${item.comment}" />
                             </div>
+                        <%}%>
                             <div class="col-sm-3">
                                 <#button name="搜索" icon="fa-search" clickFun="${context.bizEnBigName}.search()"/>
                             </div>

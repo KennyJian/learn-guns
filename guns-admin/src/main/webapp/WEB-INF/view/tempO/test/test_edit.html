@@ -1,17 +1,18 @@
 @layout("/common/_container.html"){
 <div class="ibox float-e-margins">
     <div class="ibox-content">
-        <div class="form-horizontal">
+        <div class="form-horizontal" id="TestInfoForm">
 
             <input id="id" value="${item.id}" type="hidden"/>
             <div class="row">
                 <div class="col-sm-6 b-r">
-                            <#input id="orderName" name="订单名" value="${item.orderName}" />
+                            <#input id="orderName" name="订单名" value="${item.orderName}" underline="true"/>
+                            <#input id="orderNum" name="订单数量" value="${item.orderNum}" />
                 </div>
 
                 <div class="col-sm-6">
-                            <#input id="orderNum" name="订单数量" value="${item.orderNum}" underline="true"/>
-                            <#input id="orderTo" name="订单发往地" value="${item.orderTo}" />
+                            <#input id="orderTo" name="订单发往地" value="${item.orderTo}" underline="true"/>
+                            <#input id="deptid" name="所属公司id" value="${item.deptid}" />
                 </div>
             </div>
 

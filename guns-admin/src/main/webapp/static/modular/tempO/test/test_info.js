@@ -1,8 +1,47 @@
 /**
- * 初始化测试第一模板详情对话框
+ * 初始化测试数据范围详情对话框
  */
 var TestInfoDlg = {
-    testInfoData : {}
+    testInfoData : {},
+    validateFields: {
+            orderName: {
+                validators: {
+                    notEmpty: {
+                        message: '订单名不能为空'
+                    }
+                }
+            },
+            orderNum: {
+                validators: {
+                    notEmpty: {
+                        message: '订单数量不能为空'
+                    }
+                }
+            },
+            orderTo: {
+                validators: {
+                    notEmpty: {
+                        message: '订单发往地不能为空'
+                    }
+                }
+            },
+            deptid: {
+                validators: {
+                    notEmpty: {
+                        message: '所属公司id不能为空'
+                    }
+                }
+            }
+    }
+};
+
+/**
+ * 验证数据是否为空
+ */
+TestInfoDlg.validate = function () {
+    $('#TestInfoForm').data("bootstrapValidator").resetForm();
+    $('#TestInfoForm').bootstrapValidator('validate');
+    return $("#TestInfoForm").data('bootstrapValidator').isValid();
 };
 
 /**
@@ -48,7 +87,8 @@ TestInfoDlg.collectData = function() {
     .set('id')
     .set('orderName')
     .set('orderNum')
-    .set('orderTo');
+    .set('orderTo')
+    .set('deptid');
 }
 
 /**
@@ -58,6 +98,10 @@ TestInfoDlg.addSubmit = function() {
 
     this.clearData();
     this.collectData();
+
+    if (!this.validate()) {
+        return;
+    }
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/test/add", function(data){
@@ -79,6 +123,10 @@ TestInfoDlg.editSubmit = function() {
     this.clearData();
     this.collectData();
 
+    if (!this.validate()) {
+        return;
+    }
+
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/test/update", function(data){
         Feng.success("修改成功!");
@@ -92,5 +140,5 @@ TestInfoDlg.editSubmit = function() {
 }
 
 $(function() {
-
+    Feng.initValidator("TestInfoForm", TestInfoDlg.validateFields);
 });
