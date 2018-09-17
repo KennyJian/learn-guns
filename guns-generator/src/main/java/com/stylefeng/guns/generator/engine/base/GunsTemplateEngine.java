@@ -21,7 +21,7 @@ import java.util.Properties;
  */
 public abstract class GunsTemplateEngine extends AbstractTemplateEngine {
 
-    private GroupTemplate groupTemplate;
+        private GroupTemplate groupTemplate;
 
     public GunsTemplateEngine() {
         initBeetlEngine();

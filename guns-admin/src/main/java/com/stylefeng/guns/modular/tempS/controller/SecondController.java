@@ -1,6 +1,13 @@
 package com.stylefeng.guns.modular.tempS.controller;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.datascope.DataScope;
+import com.stylefeng.guns.core.shiro.ShiroKit;
+import com.stylefeng.guns.core.util.ToolUtil;
+import com.stylefeng.guns.modular.system.model.MyOrder;
+import com.stylefeng.guns.modular.system.warpper.UserWarpper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -11,6 +18,9 @@ import com.stylefeng.guns.core.log.LogObjectHolder;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.modular.system.model.Second;
 import com.stylefeng.guns.modular.tempS.service.ISecondService;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 测试第二模板控制器
@@ -61,8 +71,21 @@ public class SecondController extends BaseController {
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String condition) {
-        return secondService.selectList(null);
+    public Object list(@RequestParam(required = false) String goodsid,@RequestParam(required = false) String goodsname,@RequestParam(required = false) String goodsquality) {
+        EntityWrapper<Second> myOrderEntityWrapper=new EntityWrapper<>();
+        if(ToolUtil.isNotEmpty(goodsid)){
+            myOrderEntityWrapper.like("id",goodsid);
+        }
+        if(ToolUtil.isNotEmpty(goodsname)){
+            myOrderEntityWrapper.like("goods",goodsname);
+        }
+        if(ToolUtil.isNotEmpty(goodsquality)){
+            myOrderEntityWrapper.like("quality",goodsquality);
+        }
+        if (!ShiroKit.isAdmin()){
+            myOrderEntityWrapper.in("deptid",ShiroKit.getDeptDataScope());
+        }
+        return secondService.selectList(myOrderEntityWrapper);
     }
 
     /**

@@ -1,5 +1,7 @@
 package com.stylefeng.guns.modular.tempS.service;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.stylefeng.guns.core.datascope.DataScope;
 import com.stylefeng.guns.modular.system.model.Second;
 import com.baomidou.mybatisplus.service.IService;
 

@@ -87,7 +87,9 @@ Second.delete = function () {
  */
 Second.search = function () {
     var queryData = {};
-    queryData['condition'] = $("#condition").val();
+    queryData['goodsid'] = $("#goodsid").val();
+    queryData['goodsname'] = $("#goodsname").val();
+    queryData['goodsquality'] = $("#goodsquality").val();
     Second.table.refresh({query: queryData});
 };
 
